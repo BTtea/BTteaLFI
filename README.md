@@ -4,7 +4,13 @@
 # BTteaLFI
  An LFI vulnerability scanning tool
 
-Usage:
+# Install
+```bash
+    git clone 
+    bash bttealfi.sh --color -u <URL>
+```
+
+# Usage
 ```bash
     bash bttealfi.sh --help
     bash bttealfi.sh --color -u <URL>
