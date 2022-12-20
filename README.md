@@ -6,8 +6,7 @@
 
 # Install
 ```bash
-    git clone 
-    bash bttealfi.sh --color -u <URL>
+    git clone https://github.com/BTtea/BTteaLFI.git
 ```
 
 # Usage
