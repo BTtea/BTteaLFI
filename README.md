@@ -1,6 +1,8 @@
 # 軟體僅供學術研究，請勿用於違法用途。
 # The software is for academic research only, please do not use it for illegal purposes.
 
+# 有 bug ，會找時間修，現在沒空，歡迎回報
+
 # BTteaLFI
  An LFI vulnerability scanning tool
 
