@@ -8,7 +8,9 @@
 
 ## Tool Usage
 * You need to install the dependencies:
+
   `$ python3 -m pip install requests`
 
 * Run the script directly to get usage instructions.
+
   `$ python3 bttealfi.py -h`
