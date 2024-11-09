@@ -324,7 +324,7 @@ def ProGramARGS():
     parser.add_argument("--os",type=str,metavar='OS type',choices=['windows','linux','all'],default='all',help="debug information")
     parser.add_argument("--prefix",type=str,help="Specify prefix")
     parser.add_argument("--suffix",type=str,help="Specify suffix")
-    parser.add_argument("--technique",type=str,default='PM',help="testing technique")
+    parser.add_argument("--technique",type=str,default='PM',help="Specify testing techniques, supporting PM and SW options; the default is PM.")
     group.add_argument("-p",type=str,metavar='PARAM',help="Specify parameters")
     group.add_argument("--skip",type=str,metavar='PARAM',help="skip parameters")
 
