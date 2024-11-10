@@ -7,6 +7,10 @@ from argparse import ArgumentParser
 from datetime import datetime
 from copy import deepcopy
 from re import findall
+from requests.exceptions import SSLError
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+
 
 class ANSIcolor():
     BLACK = '\033[30m'
@@ -40,6 +44,8 @@ class LFIexploit():
     SpecifySuffix=''
     TestingTechnique=[]
     def __init__(self,url:str,data='',cookie='',header='',tamper='',os='all',v=1,p='',skip='',prefix='',suffix='',technique=''):
+        self.Verify=None
+        self.SSL_Is_Check=0
         self.URL=url
         self.COOKIE=cookie
         self.HEADER=header
@@ -51,7 +57,7 @@ class LFIexploit():
         self.SpecifyPrefix=[prefix,''][prefix==None]
         self.SpecifySuffix=[suffix,''][suffix==None]
         self.TestingTechnique=(technique.split(',') if technique else [])
-        
+
         if '?' in url:
             self.Method='GET'
             self.Target=url.split('?')[0]
@@ -62,6 +68,7 @@ class LFIexploit():
         if data:
             self.Method='POST'
             self.POST_Data=self.ParamToDict(data)
+
 
     def ParamToDict(self,param:str):
         tmp={}
@@ -287,14 +294,43 @@ def MsgEvent(event:str) -> str:
     return tmp
 
 
+def CheckSSL(url:str,timeout:int) -> int:
+        try:
+            response = requests.get(url,verify=None,timeout=timeout)
+            return 0
+        except SSLError:
+            try:
+                response = requests.get(url, verify=False,timeout=timeout)
+                return 1
+            except Exception as e:
+                return 2
+
+
 def CheckConnection(WebTarget:LFIexploit):
+
+    if WebTarget.SSL_Is_Check==0:
+        SSL_Level=2
+        try:
+            SSL_Level=CheckSSL(WebTarget.URL,5)
+        except:
+            pass
+        
+        print(WebTarget.URL,SSL_Level)
+
+        if SSL_Level==2:
+            print(f'{ANSIcolor.RED}[-] SSL Error :( {ANSIcolor.RESET}')
+            exit(0)
+        WebTarget.SSL_Is_Check=1
+        WebTarget.Verify=[None,False][SSL_Level]
+
     res=None
     if WebTarget.Method=='GET':
         res=requests.get(
             f'{WebTarget.Target}?{WebTarget.DictToParam(WebTarget.GET_Data)}',
             headers={
                 'Cookie': WebTarget.Cookie,
-            }
+            },
+            verify=WebTarget.Verify
         )
     elif WebTarget.Method=='POST':
         res=requests.post(
@@ -302,7 +338,8 @@ def CheckConnection(WebTarget:LFIexploit):
             data=WebTarget.POST_Data,
             headers={
                 'Cookie': WebTarget.Cookie,
-            }
+            },
+            verify=WebTarget.Verify
         )
     return res
 
