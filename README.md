@@ -1,5 +1,6 @@
 # LFI vulnerability scanning tool
 ![](./img/logo.png)
+
 *Used for identifying and discovering exploitable LFI vulnerabilities.*
 
 **This PoC is for learning and research purposes only. Do not use it for illegal activities; you are solely responsible for any legal consequences.**
@@ -17,4 +18,5 @@
 * Run the script directly to get usage instructions.
 
   `$ python3 bttealfi.py -h`
+  
   ![](./img/main.png)
