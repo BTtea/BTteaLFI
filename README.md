@@ -3,6 +3,7 @@ See the 'LICENSE.txt' file for details.
 
 # bttealfi
 ![](lib/data/img/logo.png)
+
 bttealfi is an open-source penetration testing tool that can automatically detect and exploit LFI vulnerabilities. It offers a wide range of parameters and uses content-based detection techniques to try to uncover potential weaknesses.
 
 If a penetration tester is highly familiar with LFI vulnerabilities, they can leverage CVE-2024-4577 to enumerate files (in cases where RCE is blocked by a WAF), or if they have SQL injection-to-LFI access, this tool can save time on enumerating or downloading files, thereby further exposing target information and weaknesses.
