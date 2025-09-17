@@ -108,7 +108,7 @@ def ParamDebug(ExploitArgv):
 
     # Check GET or POST param
     if ((not ExploitArgv.url.get_param) and (not ExploitArgv.body.post_param)) and ('*' not in str(ExploitArgv.url) and '*' not in str(ExploitArgv.body)):
-        print(MsgEvent(ExploitArgv.DebugLevel(),'CRITICAL',"no parameter(s) found for testing in the provided data (e.g. GET parameter 'action' in 'www.site.com/index.php?action=home')"))
+        print(MsgEvent(ExploitArgv.DebugLevel(),'CRITICAL',"no parameter(s) found for testing in the provided data (e.g. GET parameter 'action' in 'www.site.com/index.php?action=*')"))
         exit(0)
 
     # Check Specify Params
