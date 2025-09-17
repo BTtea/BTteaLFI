@@ -21,47 +21,55 @@ bttealfi 是一款開源滲透測試工具，可自動偵測並利用LFI漏洞�
 
 * 基本參數，注入點請用'*'標記
 
-`python bttealfi.py -u "http://target/vuln.php?page=*" --batch`
+  `python bttealfi.py -u "http://target/vuln.php?page=*" --batch`
+
+  * POST
+
+    `python bttealfi.py -u "http://target/vuln.php" --data "page=*" --batch`
+  
+  * JSON
+
+    `python bttealfi.py -u "http://target/vuln.php" --data '{"page":"*"}' --batch`
 
 * 清除成功注入紀錄
 
-`python bttealfi.py -u "http://target/vuln.php?page=*" --batch --flush-session`
+  `python bttealfi.py -u "http://target/vuln.php?page=*" --batch --flush-session`
 
 * 你可以加上 -v 參數來設定顯示的訊息詳細內容 [0-6]
 
-`python bttealfi.py -u "http://target/vuln.php?page=*" --batch -v 3`
+  `python bttealfi.py -u "http://target/vuln.php?page=*" --batch -v 3`
 
 * 你可以透過參數--move來設置路徑移動的深度，預設為5
 
-`python bttealfi.py -u "http://target/vuln.php?page=*" --batch -v 3 --move 5`
+  `python bttealfi.py -u "http://target/vuln.php?page=*" --batch -v 3 --move 5`
 
-如果你已經知道路徑深度，不想遍歷，可以使用--depth-path
+  如果你已經知道路徑深度，不想遍歷，可以使用--depth-path
 
-`python bttealfi.py -u "http://target/vuln.php?page=*" --batch -v 3 --depth-path 8`
+  `python bttealfi.py -u "http://target/vuln.php?page=*" --batch -v 3 --depth-path 8`
 
 * 你可以使用--test-skip 來指定提示訊息來跳過不想測試的負載，例如info中出現passwd或relative path access的訊息
 
-`python bttealfi.py -u "http://target/vuln.php?page=*" --batch -v 3 --test-skip "passwd,relative path access"`
+  `python bttealfi.py -u "http://target/vuln.php?page=*" --batch -v 3 --test-skip "passwd,relative path access"`
 
 * 你可以透過新增前後綴來自定義注入的payload
 
-`python bttealfi.py -u "http://target/vuln.php?page=*" --batch -v 3 --prefix "test/" --suffix "%00"`
+  `python bttealfi.py -u "http://target/vuln.php?page=*" --batch -v 3 --prefix "test/" --suffix "%00"`
 
 * 如果目標存在WAF或者過濾器，可以使用參數 --tamper 來飲用以定義的繞過腳本，你也可以自己根據規則撰寫並使工具引用，如須繞過多種規則也可以將腳本用逗號隔開一起使用(腳本轉換使用先進先出)
 
-`python bttealfi.py -u "http://target/vuln.php?page=*" --batch -v 3 --tamper dotslashobfuscate,base64encode`
+  `python bttealfi.py -u "http://target/vuln.php?page=*" --batch -v 3 --tamper dotslashobfuscate,base64encode`
 
 * 當你成功利用目標並列出payload時，可以使用 --lfi-shell 參數來方便列舉目標系統上的檔案
 
-`python bttealfi.py -u "http://target/vuln.php?page=*" --batch -v 3 --lfi-shell`
+  `python bttealfi.py -u "http://target/vuln.php?page=*" --batch -v 3 --lfi-shell`
 
-如果目標的回應訊息太多多餘資訊，影響原本獲取的文件內容，可配合使用 --detect-prefix 與 --detect-suffix 來指定要捕捉的內容範圍
+  如果目標的回應訊息太多多餘資訊，影響原本獲取的文件內容，可配合使用 --detect-prefix 與 --detect-suffix 來指定要捕捉的內容範圍
 
-`python bttealfi.py -u "http://target/vuln.php?page=*" --batch -v 3 --lfi-shell --detect-prefix "內容前綴" --detect-suffix "內容後綴"`
+  `python bttealfi.py -u "http://target/vuln.php?page=*" --batch -v 3 --lfi-shell --detect-prefix "內容前綴" --detect-suffix "內容後綴"`
 
-如果不需要顯示內容，或者你可能只是要下載一些二進制文件，可以配合使用 --dump 參數來將輸入的檔案自動儲存至本地
+  如果不需要顯示內容，或者你可能只是要下載一些二進制文件，可以配合使用 --dump 參數來將輸入的檔案自動儲存至本地
 
-`python bttealfi.py -u "http://target/vuln.php?page=*" --batch -v 3 --lfi-shell --dump`
+  `python bttealfi.py -u "http://target/vuln.php?page=*" --batch -v 3 --lfi-shell --dump`
 
 
 # 心得筆記
