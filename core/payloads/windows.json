@@ -1,0 +1,160 @@
+{
+    "absolute_path": {
+        "all": {
+            "data":[
+                {
+                    "level":1,
+                    "path": "C:/Windows/win.ini",
+                    "content": "; for 16-bit app support",
+                    "message": "absolute path 'C:\\Windows\\win.ini' (Windows)",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                },
+                {
+                    "level":1,
+                    "path": "C:/Windows/system.ini",
+                    "content": "; for 16-bit app support",
+                    "message": "absolute path 'C:\\Windows\\system.ini' (Windows)",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                }
+            ],
+            "version":[]
+        },
+        "php": {
+            "data": [
+                {
+                    "level":3,
+                    "path": "C:/xampp/php/php.ini",
+                    "content": ";;;;;;;;;;;;;;;;;;;\r\n; About php.ini   ;\r\n;;;;;;;;;;;;;;;;;;;",
+                    "message": "absolute path 'C:\\xampp\\php\\php.ini' (Windows)",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                }
+            ],
+            "version": []
+        },
+        "aspx": {
+            "data": [
+                {
+                    "level":1,
+                    "path": "web.config",
+                    "content": "<configuration>",
+                    "message": "absolute path access to the ASPX file 'web.config'",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                }
+            ],
+            "version": []
+        },
+        "jsp": {
+            "data": [
+                {
+                    "level":1,
+                    "path": "web.xml",
+                    "content": "<welcome-file-list>",
+                    "message": "absolute path access to the ASPX file 'web.xml'",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                }
+            ],
+            "version": []
+        }
+    },
+
+    "relative_path": {
+        "all": {
+            "data":[
+                {
+                    "level":1,
+                    "path": "Windows/win.ini",
+                    "content": "; for 16-bit app support",
+                    "message": "relative path 'C:\\Windows\\win.ini' (Windows)",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                },
+                {
+                    "level":1,
+                    "path": "Windows/system.ini",
+                    "content": "; for 16-bit app support",
+                    "message": "relative path 'C:\\Windows\\system.ini' (Windows)",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                }
+            ],
+            "version":[]
+        },
+        "php": {
+            "data": [
+                {
+                    "level":3,
+                    "path": "xampp/php/php.ini",
+                    "content": ";;;;;;;;;;;;;;;;;;;\r\n; About php.ini   ;\r\n;;;;;;;;;;;;;;;;;;;",
+                    "message": "relative path 'C:\\xampp\\php\\php.ini' (Windows)",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                }
+            ],
+            "version": []
+        },
+        "aspx": {
+            "data": [
+                {
+                    "level":1,
+                    "path": "web.config",
+                    "content": "<configuration>",
+                    "message": "relative path access to the ASPX file 'web.config'",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                }
+            ],
+            "version": []
+        },
+        "jsp": {
+            "data": [
+                {
+                    "level":1,
+                    "path": "web.xml",
+                    "content": "<welcome-file-list>",
+                    "message": "relative path access to the ASPX file 'web.xml'",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                }
+            ],
+            "version": []
+        }
+    }
+
+    
+
+}

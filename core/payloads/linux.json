@@ -1,0 +1,320 @@
+{
+    "absolute_path": {
+        "all": {
+            "data": [
+                {
+                    "level":1,
+                    "path": "/etc/passwd",
+                    "content": "root:x:0:0",
+                    "message": "absolute path access to the OS file '/etc/passwd' (Linux/Unix)",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                },
+                {
+                    "level":1,
+                    "path": "/etc/hosts",
+                    "content": "127.0.0.1\tlocalhost",
+                    "message": "absolute path access to the OS file '/etc/hosts' (Linux/Unix)",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                },
+                {
+                    "level":1,
+                    "path": "/etc/services",
+                    "content": "# Note that it is presently the policy of IANA to assign a single well-known\n# port number for both TCP and UDP; hence, most entries here have two entries\n# even if the protocol doesn't support UDP operations.",
+                    "message": "absolute path access to the OS file '/etc/services' (Linux/Unix)",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                }
+            ],
+            "version": []
+        },
+        "php": {
+            "data": [
+                {
+                    "level":3,
+                    "path": "/etc/php/{0}/apache2/php.ini",
+                    "content": ";;;;;;;;;;;;;;;;;;;\n; About php.ini   ;\n;;;;;;;;;;;;;;;;;;;",
+                    "message": "absolute path access to the PHP file '/etc/php/{0}/apache2/php.ini' (Linux/Unix)",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                },
+                {
+                    "level":3,
+                    "path": "/etc/php/{0}/cli/php.ini",
+                    "content": ";;;;;;;;;;;;;;;;;;;\n; About php.ini   ;\n;;;;;;;;;;;;;;;;;;;",
+                    "message": "absolute path access to the PHP file '/etc/php/{0}/cli/php.ini' (Linux/Unix)",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                },
+                {
+                    "level":3,
+                    "path": "/etc/php/{0}/fpm/php.ini",
+                    "content": ";;;;;;;;;;;;;;;;;;;\n; About php.ini   ;\n;;;;;;;;;;;;;;;;;;;",
+                    "message": "absolute path access to the PHP file '/etc/php/{0}/cli/php.ini' (Linux/Unix)",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                }
+            ],
+            "version": [
+                "4",
+                "4.0",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "5",
+                "5.0",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.5",
+                "5.6",
+                "7",
+                "7.0",
+                "7.1",
+                "7.2",
+                "7.3",
+                "7.4",
+                "8",
+                "8.0",
+                "8.1",
+                "8.2",
+                "8.3",
+                "8.4"
+            ]
+        },
+        "aspx": {
+            "data": [
+                {
+                    "level":1,
+                    "path": "web.config",
+                    "content": "<configuration>",
+                    "message": "absolute path access to the ASPX file 'web.config'",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                }
+            ],
+            "version": []
+        },
+        "jsp": {
+            "data": [
+                {
+                    "level":1,
+                    "path": "web.xml",
+                    "content": "<welcome-file-list>",
+                    "message": "absolute path access to the ASPX file 'web.xml'",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                }
+            ],
+            "version": []
+        }
+    },
+    "relative_path": {
+        "all": {
+            "data": [
+                {
+                    "level":1,
+                    "path": "etc/passwd",
+                    "content": "root:x:0:0",
+                    "message": "relative path access to the OS file 'passwd' (Linux/Unix)",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                },
+                {
+                    "level":1,
+                    "path": "etc/hosts",
+                    "content": "127.0.0.1\tlocalhost",
+                    "message": "relative path access to the OS file 'hosts' (Linux/Unix)",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                },
+                {
+                    "level":1,
+                    "path": "etc/services",
+                    "content": "# Note that it is presently the policy of IANA to assign a single well-known\n# port number for both TCP and UDP; hence, most entries here have two entries\n# even if the protocol doesn't support UDP operations.",
+                    "message": "relative path access to the OS file '/etc/services' (Linux/Unix)",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                },
+                {
+                    "level":1,
+                    "path": "passwd",
+                    "content": "root:x:0:0",
+                    "message": "relative path access to the OS file 'passwd' (Linux/Unix)",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                },
+                {
+                    "level":1,
+                    "path": "hosts",
+                    "content": "127.0.0.1\tlocalhost",
+                    "message": "relative path access to the OS file 'hosts' (Linux/Unix)",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                },
+                {
+                    "level":1,
+                    "path": "services",
+                    "content": "# Note that it is presently the policy of IANA to assign a single well-known\n# port number for both TCP and UDP; hence, officially ports have two entries\n# even if the protocol doesn't support UDP operations.",
+                    "message": "relative path access to the OS file 'services' (Linux/Unix)",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                },
+                {
+                    "level":3,
+                    "path": "php.ini",
+                    "content": ";;;;;;;;;;;;;;;;;;;\n; About php.ini   ;\n;;;;;;;;;;;;;;;;;;;",
+                    "message": "relative path access to the PHP file 'php.ini' (Linux/Unix)",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                }
+            ],
+            "version": []
+        },
+        "php": {
+            "data": [
+                {
+                    "level":3,
+                    "path": "etc/php/{0}/apache2/php.ini",
+                    "content": ";;;;;;;;;;;;;;;;;;;\n; About php.ini   ;\n;;;;;;;;;;;;;;;;;;;",
+                    "message": "absolute path access to the PHP file '/etc/php/{0}/apache2/php.ini' (Linux/Unix)",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                },
+                {
+                    "level":3,
+                    "path": "etc/php/{0}/cli/php.ini",
+                    "content": ";;;;;;;;;;;;;;;;;;;\n; About php.ini   ;\n;;;;;;;;;;;;;;;;;;;",
+                    "message": "absolute path access to the PHP file '/etc/php/{0}/cli/php.ini' (Linux/Unix)",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                },
+                {
+                    "level":3,
+                    "path": "etc/php/{0}/fpm/php.ini",
+                    "content": ";;;;;;;;;;;;;;;;;;;\n; About php.ini   ;\n;;;;;;;;;;;;;;;;;;;",
+                    "message": "absolute path access to the PHP file '/etc/php/{0}/cli/php.ini' (Linux/Unix)",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                }
+            ],
+            "version": [
+                "4",
+                "4.0",
+                "4.1",
+                "4.2",
+                "4.3",
+                "4.4",
+                "5",
+                "5.0",
+                "5.1",
+                "5.2",
+                "5.3",
+                "5.4",
+                "5.5",
+                "5.6",
+                "7",
+                "7.0",
+                "7.1",
+                "7.2",
+                "7.3",
+                "7.4",
+                "8",
+                "8.0",
+                "8.1",
+                "8.2",
+                "8.3",
+                "8.4"
+            ]
+        },
+        "aspx": {
+            "data": [
+                {
+                    "level":1,
+                    "path": "web.config",
+                    "content": "<configuration>",
+                    "message": "relative path access to the ASPX file 'web.config'",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                }
+            ],
+            "version": []
+        },
+        "jsp": {
+            "data": [
+                {
+                    "level":1,
+                    "path": "web.xml",
+                    "content": "<welcome-file-list>",
+                    "message": "relative path access to the ASPX file 'web.xml'",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                }
+            ],
+            "version": []
+        }
+    }
+}
