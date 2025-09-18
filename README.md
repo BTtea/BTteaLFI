@@ -74,16 +74,16 @@ Only supports Python 3.x versions
   `python bttealfi.py -u "http://target/vuln.php?page=*" --batch -v 3 --lfi-shell --dump`
 
 # Some demo screenshots
-Using debug parameters
+#### Using debug parameters
 ![](lib/data/img/debug.png)
 
-Custom prefixes and suffixes
+#### Custom prefixes and suffixes
 ![](lib/data/img/prefix_suffix.png)
 
-Use the `--lfi-shell` parameter to quickly traverse file contents
+#### Use the `--lfi-shell` parameter to quickly traverse file contents
 ![](lib/data/img/lfi_shell.png)
 
-Use `--detect-prefix` to define a prefix to limit captured content, and use `--dump` to save the retrieved content locally (without displaying it). Additionally, use `--answer` to specify the chosen response when a prompt appears.
+#### Use `--detect-prefix` to define a prefix to limit captured content, and use `--dump` to save the retrieved content locally (without displaying it). Additionally, use `--answer` to specify the chosen response when a prompt appears.
 ![](lib/data/img/lfi_shell_detect_prefix_dump_answer.png)
 
 # Notes
