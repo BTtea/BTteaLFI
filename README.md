@@ -81,12 +81,13 @@ That said, this project has not fully met my expectations. There are many featur
 
 # Future Development Goals
 * Refactor the code and optimize modularizable functions as well as verbose implementations
+* Introduce 4096 (Linux) and 256 (Windows) suffix truncation testing techniques
 * Add a new parameter `--phpinfo`
 * Add a key parameter `--os-shell`
-* Introduce 4096 (Linux) and 256 (Windows) suffix truncation testing techniques
 * Extensions of the `--os-shell` feature:
   * Exploit RCE for all detected techniques
   * Detect and exploit pearcmd.php
+  * Detect and exploit CVE-2012-1823
   * Detect and exploit CVE-2024-4577
   * Detect and exploit CVE-2024-2961
   * Exploit phpinfo.php through race conditions
