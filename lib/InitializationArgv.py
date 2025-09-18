@@ -43,7 +43,7 @@ def ProGramARGS(argv):
     parser.add_argument("--batch", default=False, action="store_true", help="Never ask for user input, use the default behavior")
     parser.add_argument("--answer",type=str,default='',help='Set predefined answers (e.g. "quit=N,follow=N")')
     parser.add_argument("--move",type=int,metavar='Number',default=5,help="Number of path traversal levels, default is 5")
-    parser.add_argument("--retry",type=int,metavar='Number',default=3,help="Number of retries on connection failure, default is 3")
+    parser.add_argument("--retries",type=int,metavar='Number',default=3,help="Number of retries on connection failure, default is 3")
     parser.add_argument("--path-depth",type=int,metavar='Number',default=0,help="Traversal range for testing LFI path depth, default is 0")
     parser.add_argument("--skip-xss", default=False, action="store_true", help="Skip XSS payload testing")
     parser.add_argument("--test-skip",type=str,metavar='Prompt',default='',help="Skip payload tests for the specified prompt.")

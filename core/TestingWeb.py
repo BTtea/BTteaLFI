@@ -136,7 +136,7 @@ def test_connectivity(target,argv={"POST":"","GET":""}):
     print(MsgEvent(tmp_target.DebugLevel(),'TRAFFIC OUT',f'HTTP request:\n{req}'),end='')
     
     res=''
-    for retry in range(target.args.retry):
+    for retry in range(target.args.retries):
         try:
             res=SendRequest(tmp_target,req)
         except KeyboardInterrupt:

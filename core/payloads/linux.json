@@ -125,7 +125,7 @@
                     "level":1,
                     "path": "web.xml",
                     "content": "<welcome-file-list>",
-                    "message": "absolute path access to the ASPX file 'web.xml'",
+                    "message": "absolute path access to the JSP file 'web.xml'",
                     "error":[],
                     "argv":{
                         "GET" :"",
@@ -143,7 +143,7 @@
                     "level":1,
                     "path": "etc/passwd",
                     "content": "root:x:0:0",
-                    "message": "relative path access to the OS file 'passwd' (Linux/Unix)",
+                    "message": "relative path access to the OS file '/etc/passwd' (Linux/Unix)",
                     "error":[],
                     "argv":{
                         "GET" :"",
@@ -154,7 +154,7 @@
                     "level":1,
                     "path": "etc/hosts",
                     "content": "127.0.0.1\tlocalhost",
-                    "message": "relative path access to the OS file 'hosts' (Linux/Unix)",
+                    "message": "relative path access to the OS file '/etc/hosts' (Linux/Unix)",
                     "error":[],
                     "argv":{
                         "GET" :"",
