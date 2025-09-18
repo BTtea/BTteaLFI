@@ -19,7 +19,57 @@ Only supports Python 3.x versions
 
 # Usage
 
-`python bttealfi.py -h`
+```
+$ python bttealfi.py -h
+usage: bttealfi.py [-h] [--version] -u URL [--data DATA] [--method METHOD] [--cookie COOKIE] [-H HEADER]
+                   [--random-agent] [--tamper TAMPER] [-v DEBUG_LEVEL] [--os OS type] [--prefix PREFIX]
+                   [--suffix SUFFIX] [--technique TECHNIQUE] [--php-wrapper PHP_WRAPPER] [--level {1,2,3}]
+                   [--backend-app {all,php,aspx,jsp}] [--batch] [--answer ANSWER] [--move Number]
+                   [--retries Number] [--path-depth Number] [--skip-xss] [--test-skip Prompt] [--flush-session]
+                   [--lfi-shell] [--detect-prefix DETECT_PREFIX] [--detect-suffix DETECT_SUFFIX] [--dump]
+                   [--timeout Number] [-p PARAM | --skip PARAM]
+
+options:
+  -h, --help            show this help message and exit
+  --version             Show program's version number and exits
+  -u URL, --url URL     input URL
+  --data DATA           POST data
+  --method METHOD       Method
+  --cookie COOKIE       cookie session
+  -H HEADER, --header HEADER
+                        headers
+  --random-agent        Use randomly selected HTTP User-Agent header value
+  --tamper TAMPER       tamper file
+  -v DEBUG_LEVEL        debug information
+  --os OS type          Specify the backend operating system
+  --prefix PREFIX       Specify prefix
+  --suffix SUFFIX       Specify suffix
+  --technique TECHNIQUE
+                        Specify testing techniques, Support RP, AP, and PHP_F options.
+  --php-wrapper PHP_WRAPPER
+                        Default test keywords for 'php://filter'
+  --level {1,2,3}       File type detection level — the higher the level, the more file types can be detected.
+                        Default: 1
+  --backend-app {all,php,aspx,jsp}
+                        Web backend technology (php, asp, jsp). Default: all.
+  --batch               Never ask for user input, use the default behavior
+  --answer ANSWER       Set predefined answers (e.g. "quit=N,follow=N")
+  --move Number         Number of path traversal levels, default is 5
+  --retries Number      Number of retries on connection failure, default is 3
+  --path-depth Number   Traversal range for testing LFI path depth, default is 0
+  --skip-xss            Skip XSS payload testing
+  --test-skip Prompt    Skip payload tests for the specified prompt.
+  --flush-session       Flush session files for current target
+  --lfi-shell           Prompt for an interactive LFI shell
+  --detect-prefix DETECT_PREFIX
+                        Context prefix for LFI file output
+  --detect-suffix DETECT_SUFFIX
+                        Context suffix for LFI file output
+  --dump                Convert text output into a download
+  --timeout Number      Time to wait for the web page response, default is 5 seconds
+  -p PARAM              Specify parameters
+  --skip PARAM          skip parameters
+```
 
 * Basic parameters: mark the injection point with '*'
 
