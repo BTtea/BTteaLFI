@@ -71,6 +71,19 @@ bttealfi 是一款開源滲透測試工具，可自動偵測並利用LFI漏洞�
 
   `python bttealfi.py -u "http://target/vuln.php?page=*" --batch -v 3 --lfi-shell --dump`
 
+# 一些演示截圖
+使用除錯參數
+![](lib/data/img/debug.png)
+
+自定義前後綴
+![](lib/data/img/prefix_suffix.png)
+
+使用`--lfi-shell`參數來快速遍歷檔案內容
+![](lib/data/img/lfi_shell.png)
+
+使用`--detect-prefix`來定義前綴用以限制捕捉的內容，並使用`--dump`來將取得的內容儲存在本地(不顯示)，並且使用`--answer`來定義有出現提問時來指定所選的回應
+![](lib/data/img/lfi_shell_detect_prefix_dump_answer.png)
+
 
 # 心得筆記
 sqlmap真的是一款完美且優秀的工具，使我在滲透上的工作變的便利且快速，然而卻沒有一款針對LFI的自動化工具真正讓我覺得好用，並且我也厭倦了每一次發現LFI弱點都需要重新設計利用腳本，因此，我開啟的這個專案並根據自身經驗，參考sqlmap上的一些運作行為，來嘗試將LFI利用武器化，而我認為不直接參考sqlmap程式碼是我給自己的一種挑戰，每完成一個功能便越來越覺得sqlmap是一個真正厲害且優雅的工具，然而此專案並非我預期的結果，有許多我想實現但尚未實作進去的功能(皆因自身程式設計經驗不足所導致後期程式碼難以維護)，事實上，我將計畫準備進行第四次重構😉。

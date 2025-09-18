@@ -73,6 +73,19 @@ Only supports Python 3.x versions
 
   `python bttealfi.py -u "http://target/vuln.php?page=*" --batch -v 3 --lfi-shell --dump`
 
+# Some demo screenshots
+Using debug parameters
+![](lib/data/img/debug.png)
+
+Custom prefixes and suffixes
+![](lib/data/img/prefix_suffix.png)
+
+Use the `--lfi-shell` parameter to quickly traverse file contents
+![](lib/data/img/lfi_shell.png)
+
+Use `--detect-prefix` to define a prefix to limit captured content, and use `--dump` to save the retrieved content locally (without displaying it). Additionally, use `--answer` to specify the chosen response when a prompt appears.
+![](lib/data/img/lfi_shell_detect_prefix_dump_answer.png)
+
 # Notes
 Sqlmap is truly a perfect and outstanding tool, making my penetration testing work convenient and fast. However, there isn’t a fully automated tool for LFI that I find really practical. I also grew tired of having to redesign exploitation scripts every time I discovered an LFI vulnerability. Therefore, I started this project based on my own experience and by referencing some operational behaviors of sqlmap, attempting to weaponize LFI exploitation. I intentionally chose not to directly reference sqlmap’s code as a personal challenge. Every time I complete a feature, I increasingly appreciate how truly powerful and elegant sqlmap is.
 
