@@ -152,6 +152,9 @@ def ParamDebug(ExploitArgv):
     if ExploitArgv.args.move!=5 and ExploitArgv.args.path_depth!=0:
         print(MsgEvent(ExploitArgv.DebugLevel(),'ERROR',f"'--move' and '--path-depth' cannot be used at the same time."),end='')
         exit(0)
+    
+    if ExploitArgv.args.php_wrapper == '/etc/passwd':
+        print(MsgEvent(ExploitArgv.DebugLevel(),'WARNING',f"Recommend using --php-wrapper to specify the original value (e.g., if vuln.php?action=home, then use '--php-wrapper home') to improve detection of php://filter-based LFI."),end='')
 
     return
 

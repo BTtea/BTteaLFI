@@ -175,6 +175,7 @@ def TamperPipeLine(tampers:list,payload:str) -> str:
             payload=bypass.tamper(payload)
     return payload
 
+
 def find_injection_points(target,HTTP_method):
     from os import listdir
     if HTTP_method=='POST':

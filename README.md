@@ -145,6 +145,8 @@ That said, this project has not fully met my expectations. There are many featur
 # Future Development Goals
 * Refactor the code and optimize modularizable functions as well as verbose implementations
 * Introduce 4096 (Linux) and 256 (Windows) suffix truncation testing techniques
+* Added RFI and SSRF testing techniques
+* Added detection techniques for various wrappers
 * Add a new parameter `--phpinfo`
 * Add a key parameter `--os-shell`
 * Extensions of the `--os-shell` feature:
