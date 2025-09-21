@@ -17,43 +17,82 @@ class ANSIcolors():
     UNDERLINE   = '\033[4m'
     RESET       = '\033[0m'
 
-def ProGramARGS(argv):
+
+def ProGramARGS(argv,bttealfi_version,github_url):
     from argparse import ArgumentParser
-    if len(argv)==1:
-        print(f"usage: {argv[0]} [-h]")
-        exit(0)
-    parser = ArgumentParser()
+    parser = ArgumentParser(prog=argv[0])
+
+    # -------------------------
+    # General
+    # -------------------------
+    g_general = parser.add_argument_group('General')
+    g_general.add_argument("--version", action="version", version=bttealfi_version,
+                           help="Show program's version number and exits")
+    g_general.add_argument("-v", type=int, metavar='DEBUG_LEVEL', choices=[0,1,2,3,4,5,6],
+                           default=1, help="debug information")
+
+    # -------------------------
+    # Target
+    # -------------------------
+    g_target = parser.add_argument_group('Target')
+    g_target.add_argument("-u", "--url", type=str, required=True, help="input URL")
+    g_target.add_argument("--data", type=str, default='', help="POST data")
+
+    # -------------------------
+    # Request
+    # -------------------------
+    g_request = parser.add_argument_group('Request')
+    g_request.add_argument("--method", type=str, default='GET', help="Method")
+    g_request.add_argument("--cookie", type=str, default='', help="cookie session")
+    g_request.add_argument("-H", "--header", action="append", type=str, help="headers")
+    g_request.add_argument("--random-agent", default='', action="store_true",help="Use randomly selected HTTP User-Agent header value")
+    g_request.add_argument("--tamper", default='', type=str, help="tamper file")
+    g_request.add_argument("--timeout", type=int, metavar='Number', default=5,help="Time to wait for the web page response, default is 5 seconds")
+    g_request.add_argument("--retries", type=int, metavar='Number', default=3,help="Number of retries on connection failure, default is 3")
+
+    # -------------------------
+    # Testing
+    # -------------------------
+    g_test = parser.add_argument_group('Testing')
+    g_test.add_argument("--prefix", type=str, default='', help="Specify prefix")
+    g_test.add_argument("--suffix", type=str, default='', help="Specify suffix")
+    g_test.add_argument("--technique", type=str, default='', help="Specify testing techniques, Support RP, AP, and PHP_F options.")
+    g_test.add_argument("--php-wrapper", type=str, default='/etc/passwd',help="Default test keywords for 'php://filter'")
+    g_test.add_argument("--level", type=int, choices=[1,2,3], default=1,help="File type detection level, the higher the level, the more file types can be detected. Default: 1")
+    g_test.add_argument("--backend-app", type=str, choices=["all","php","aspx","jsp"], default="all",help="Web backend technology (php, asp, jsp). Default: all.")
+    g_test.add_argument("--lfi-shell", default=False, action="store_true", help="Prompt for an interactive LFI shell")
+    g_test.add_argument("--move", type=int, metavar='Number', default=5,help="Number of path traversal levels, default is 5")
+    g_test.add_argument("--path-depth", type=int, metavar='Number', default=0,help="Traversal range for testing LFI path depth, default is 0")
+    g_test.add_argument("--skip-xss", default=False, action="store_true", help="Skip XSS payload testing")
+    g_test.add_argument("--test-skip", type=str, metavar='Prompt', default='', help="Skip payload tests for the specified prompt.")
+
+    # -------------------------
+    # Detection / Output parsing
+    # -------------------------
+    g_detect = parser.add_argument_group('Detection')
+    g_detect.add_argument("--detect-prefix", type=str, default='', help="Context prefix for LFI file output")
+    g_detect.add_argument("--detect-suffix", type=str, default='', help="Context suffix for LFI file output")
+    g_detect.add_argument("--dump", default=False, action="store_true", help="Convert text output into a download")
+
+    # -------------------------
+    # Output & Session
+    # -------------------------
+    g_session = parser.add_argument_group('Output / Session')
+    g_session.add_argument("--batch", default=False, action="store_true", help="Never ask for user input, use the default behavior")
+    g_session.add_argument("--answer", type=str, default='', help='Set predefined answers (e.g. "quit=N,follow=N")')
+    g_session.add_argument("--flush-session", default=False, action="store_true", help="Flush session files for current target")
+
+    # -------------------------
+    # Miscellaneous
+    # -------------------------
+    g_misc = parser.add_argument_group('Miscellaneous')
+    g_misc.add_argument("--os", type=str, metavar='OS type', choices=['windows','linux','all'], default='all',help="Specify the backend operating system")
+
     group = parser.add_mutually_exclusive_group()
-    parser.add_argument("--version",action="version",version="v2.0 (beta)", help="Show program's version number and exits")
-    parser.add_argument("-u","--url",type=str,required=True,help="input URL")
-    parser.add_argument("--data",type=str,default='',help="POST data")
-    parser.add_argument("--method",type=str,default='GET',help="Method")
-    parser.add_argument("--cookie",type=str,default='',help="cookie session")
-    parser.add_argument("-H","--header",action="append",type=str,help="headers")
-    parser.add_argument("--random-agent",default='', action="store_true", help="Use randomly selected HTTP User-Agent header value")
-    parser.add_argument("--tamper",default='',type=str,help="tamper file")
-    parser.add_argument("-v",type=int,metavar='DEBUG_LEVEL',choices=[0,1,2,3,4,5,6],default=1,help="debug information")
-    parser.add_argument("--os",type=str,metavar='OS type',choices=['windows','linux','all'],default='all',help="Specify the backend operating system")
-    parser.add_argument("--prefix",type=str,default='',help="Specify prefix")
-    parser.add_argument("--suffix",type=str,default='',help="Specify suffix")
-    parser.add_argument("--technique",type=str,default='',help="Specify testing techniques, Support RP, AP, and PHP_F options.")
-    parser.add_argument("--php-wrapper",type=str,default='/etc/passwd', help="Default test keywords for 'php://filter'")
-    parser.add_argument("--level",type=int,choices=[1,2,3],default=1,help="File type detection level — the higher the level, the more file types can be detected. Default: 1")
-    parser.add_argument("--backend-app",type=str,choices=["all","php","aspx","jsp"],default="all",help="Web backend technology (php, asp, jsp). Default: all.")
-    parser.add_argument("--batch", default=False, action="store_true", help="Never ask for user input, use the default behavior")
-    parser.add_argument("--answer",type=str,default='',help='Set predefined answers (e.g. "quit=N,follow=N")')
-    parser.add_argument("--move",type=int,metavar='Number',default=5,help="Number of path traversal levels, default is 5")
-    parser.add_argument("--retries",type=int,metavar='Number',default=3,help="Number of retries on connection failure, default is 3")
-    parser.add_argument("--path-depth",type=int,metavar='Number',default=0,help="Traversal range for testing LFI path depth, default is 0")
-    parser.add_argument("--skip-xss", default=False, action="store_true", help="Skip XSS payload testing")
-    parser.add_argument("--test-skip",type=str,metavar='Prompt',default='',help="Skip payload tests for the specified prompt.")
-    parser.add_argument("--flush-session", default=False, action="store_true", help="Flush session files for current target")
-    parser.add_argument("--lfi-shell", default=False, action="store_true", help="Prompt for an interactive LFI shell")
-    parser.add_argument("--detect-prefix",type=str,default='', help="Context prefix for LFI file output")
-    parser.add_argument("--detect-suffix",type=str,default='', help="Context suffix for LFI file output")
-    parser.add_argument("--dump", default=False, action="store_true", help="Convert text output into a download")
-    parser.add_argument("--timeout",type=int,metavar='Number',default=5,help="Time to wait for the web page response, default is 5 seconds")
-    
+    group.add_argument("-p",type=str,default='',metavar='PARAM',help="Specify parameters")
+    group.add_argument("--skip",type=str,default='',metavar='PARAM',help="skip parameters")
+
+    return parser.parse_args()
     # parser.add_argument("--os-shell", default=False, action="store_true", help="Prompt for an interactive operating system shell")
     
     # --os-uname
@@ -63,9 +102,6 @@ def ProGramARGS(argv):
     # --string
     # --eval
 
-    group.add_argument("-p",type=str,default='',metavar='PARAM',help="Specify parameters")
-    group.add_argument("--skip",type=str,default='',metavar='PARAM',help="skip parameters")
-    return parser.parse_args()
 
 
 def MsgEvent(debug_level:int,event:str,CurrntMsg:str,BoldFlag=False) -> str:

@@ -12,7 +12,7 @@ from lib import InitializationArgv
 from core import TestingWeb
 
 
-def logo(version,url=''):
+def logo(version,url):
     print()
     print(f'     /{InitializationArgv.ANSIcolors.INFO} ┳┓┏┳┓     ┓ ┏┓┳{InitializationArgv.ANSIcolors.RESET}  {version}')
     print(f'    / {InitializationArgv.ANSIcolors.INFO} ┣┫ ┃ ╋┏┓┏┓┃ ┣ ┃{InitializationArgv.ANSIcolors.RESET}')
@@ -22,15 +22,21 @@ def logo(version,url=''):
 
 
 def main(argv):
-
-    # 接收命令參數
-    exp_args = InitializationArgv.ProGramARGS(argv)
-
     bttealfi_version='v2.0 (beta)'
-    logo(bttealfi_version,'https://github.com/BTtea/BTteaLFI')
+    github_url='https://github.com/BTtea/BTteaLFI'
+    # 接收命令參數
+
+    if len(argv) == 1:
+        print(f"usage: {argv[0]} [-h | --help]")
+        exit(0)
+
+    if '--version' not in argv:
+        logo(bttealfi_version,github_url)
+
+    exp_args = InitializationArgv.ProGramARGS(argv,bttealfi_version,github_url)
 
     print("[!] legal disclaimer: Usage of bttealfi for attacking targets without prior mutual consent is illegal. It is the end user's responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program\n")
-
+    
     print(f"[*] starting @ {datetime.now().strftime('%H:%M:%S')} /{datetime.now().strftime('%Y-%m-%d')}/\n")
 
     # 處理命令設定的參數，將設定參數整理設定好
