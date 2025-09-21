@@ -23,6 +23,13 @@ def ProGramARGS(argv,bttealfi_version,github_url):
     parser = ArgumentParser(prog=argv[0])
 
     # -------------------------
+    # Target
+    # -------------------------
+    g_target = parser.add_argument_group('Target')
+    g_target.add_argument("-u", "--url", type=str, required=True, help="input URL")
+    g_target.add_argument("--data", type=str, default='', help="POST data")
+
+    # -------------------------
     # General
     # -------------------------
     g_general = parser.add_argument_group('General')
@@ -30,13 +37,6 @@ def ProGramARGS(argv,bttealfi_version,github_url):
                            help="Show program's version number and exits")
     g_general.add_argument("-v", type=int, metavar='DEBUG_LEVEL', choices=[0,1,2,3,4,5,6],
                            default=1, help="debug information")
-
-    # -------------------------
-    # Target
-    # -------------------------
-    g_target = parser.add_argument_group('Target')
-    g_target.add_argument("-u", "--url", type=str, required=True, help="input URL")
-    g_target.add_argument("--data", type=str, default='', help="POST data")
 
     # -------------------------
     # Request
@@ -138,6 +138,7 @@ def MsgEvent(debug_level:int,event:str,CurrntMsg:str,BoldFlag=False) -> str:
         Msg+=f'{EventColor[event]} {bold}{CurrntMsg}{ANSIcolors.RESET}\n'
     
     return Msg
+
 
 
 def ParamDebug(ExploitArgv):

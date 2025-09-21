@@ -176,8 +176,27 @@ def TamperPipeLine(tampers:list,payload:str) -> str:
     return payload
 
 
+def CombineCurrentInjection(mark:str,index:int,parts:list):
+    test_case = "".join(
+        parts[j] + (mark if j == index else "")
+        for j in range(len(parts))
+    )
+    return test_case
+
+
+def UpdateRequestPayload(target,HTTP_method,payload):
+    if HTTP_method=='POST':
+        target.body.body=payload
+    if HTTP_method=='GET':
+        target.url.url=payload
+        target.url.RenewURL()
+    return target
+
+
+
 def find_injection_points(target,HTTP_method):
     from os import listdir
+
     if HTTP_method=='POST':
         parts = target.body.body.split("*")
     if HTTP_method=='GET':
@@ -209,18 +228,8 @@ def find_injection_points(target,HTTP_method):
                 xss_test=f"'{RandomString()}<'\">{RandomString()}"
 
                 xss_test=TamperPipeLine(tmp_target.tampers(),xss_test)
-
-                mark = xss_test
-                test_case = "".join(
-                    parts[j] + (mark if j == currnet_injec_index else "")
-                    for j in range(len(parts))
-                )
-
-                if HTTP_method=='POST':
-                    tmp_target.body.body=test_case
-                if HTTP_method=='GET':
-                    tmp_target.url.url=test_case
-                    tmp_target.url.RenewURL()
+                test_case=CombineCurrentInjection(xss_test,currnet_injec_index,parts)
+                tmp_target=UpdateRequestPayload(tmp_target,HTTP_method,test_case)
 
                 print(MsgEvent(target.DebugLevel(),'PAYLOAD',test_case),end='')
 
@@ -284,18 +293,8 @@ def find_injection_points(target,HTTP_method):
                     php_filter_test=tmp_target.args.prefix + php_filter_test + tmp_target.args.suffix
 
                     php_filter_test=TamperPipeLine(tmp_target.tampers(),php_filter_test)
-
-                    mark = php_filter_test
-                    test_case = "".join(
-                        parts[j] + (mark if j == currnet_injec_index else "")
-                        for j in range(len(parts))
-                    )
-
-                    if HTTP_method=='POST':
-                        tmp_target.body.body=test_case
-                    if HTTP_method=='GET':
-                        tmp_target.url.url=test_case
-                        tmp_target.url.RenewURL()
+                    test_case=CombineCurrentInjection(php_filter_test,currnet_injec_index,parts)
+                    tmp_target=UpdateRequestPayload(tmp_target,HTTP_method,test_case)
 
                     print(MsgEvent(target.DebugLevel(),'PAYLOAD',test_case),end='')
 
@@ -405,18 +404,8 @@ def find_injection_points(target,HTTP_method):
                                     current_payload=tmp_target.args.prefix + p['path'].format(ver) + tmp_target.args.suffix
                                     
                                     current_payload=TamperPipeLine(tmp_target.tampers(),current_payload)
-                                
-                                    mark = current_payload
-                                    test_case = "".join(
-                                        parts[j] + (mark if j == currnet_injec_index else "")
-                                        for j in range(len(parts))
-                                    )
-                                    
-                                    if HTTP_method=='POST':
-                                        tmp_target.body.body=test_case
-                                    if HTTP_method=='GET':
-                                        tmp_target.url.url=test_case
-                                        tmp_target.url.RenewURL()
+                                    test_case=CombineCurrentInjection(current_payload,currnet_injec_index,parts)
+                                    tmp_target=UpdateRequestPayload(tmp_target,HTTP_method,test_case)
 
                                     print(MsgEvent(target.DebugLevel(),'PAYLOAD',test_case),end='')
                                     
@@ -470,18 +459,8 @@ def find_injection_points(target,HTTP_method):
                                         current_payload=tmp_target.args.prefix + move_path*(move) + p['path'].format(ver) + tmp_target.args.suffix
                                         
                                         current_payload=TamperPipeLine(tmp_target.tampers(),current_payload)
-                                    
-                                        mark = current_payload
-                                        test_case = "".join(
-                                            parts[j] + (mark if j == currnet_injec_index else "")
-                                            for j in range(len(parts))
-                                        )
-
-                                        if HTTP_method=='POST':
-                                            tmp_target.body.body=test_case
-                                        if HTTP_method=='GET':
-                                            tmp_target.url.url=test_case
-                                            tmp_target.url.RenewURL()
+                                        test_case=CombineCurrentInjection(current_payload,currnet_injec_index,parts)
+                                        tmp_target=UpdateRequestPayload(tmp_target,HTTP_method,test_case)
 
                                         print(MsgEvent(target.DebugLevel(),'PAYLOAD',test_case),end='')
 
@@ -546,18 +525,8 @@ def find_injection_points(target,HTTP_method):
                                 current_payload=tmp_target.args.prefix + p['path'] + tmp_target.args.suffix
                                 
                                 current_payload=TamperPipeLine(tmp_target.tampers(),current_payload)
-                            
-                                mark = current_payload
-                                test_case = "".join(
-                                    parts[j] + (mark if j == currnet_injec_index else "")
-                                    for j in range(len(parts))
-                                )
-
-                                if HTTP_method=='POST':
-                                    tmp_target.body.body=test_case
-                                if HTTP_method=='GET':
-                                    tmp_target.url.url=test_case
-                                    tmp_target.url.RenewURL()
+                                test_case=CombineCurrentInjection(current_payload,currnet_injec_index,parts)
+                                tmp_target=UpdateRequestPayload(tmp_target,HTTP_method,test_case)
 
                                 print(MsgEvent(target.DebugLevel(),'PAYLOAD',test_case),end='')
 
@@ -612,18 +581,8 @@ def find_injection_points(target,HTTP_method):
                                     current_payload=tmp_target.args.prefix + move_path*(move) + p['path'] + tmp_target.args.suffix
                                     
                                     current_payload=TamperPipeLine(tmp_target.tampers(),current_payload)
-                                
-                                    mark = current_payload
-                                    test_case = "".join(
-                                        parts[j] + (mark if j == currnet_injec_index else "")
-                                        for j in range(len(parts))
-                                    )
-
-                                    if HTTP_method=='POST':
-                                        tmp_target.body.body=test_case
-                                    if HTTP_method=='GET':
-                                        tmp_target.url.url=test_case
-                                        tmp_target.url.RenewURL()
+                                    test_case=CombineCurrentInjection(current_payload,currnet_injec_index,parts)
+                                    tmp_target=UpdateRequestPayload(tmp_target,HTTP_method,test_case)
 
                                     print(MsgEvent(target.DebugLevel(),'PAYLOAD',test_case),end='')
 
@@ -773,19 +732,10 @@ def find_exploit_points(target,poc):
             mark=tmp_target.args.prefix + mark + tmp_target.args.suffix
 
             mark=TamperPipeLine(tmp_target.tampers(),mark)
+            test_case=CombineCurrentInjection(mark,currnet_injec_index,parts)
+            tmp_target=UpdateRequestPayload(tmp_target,MainExploitTechnique["HTTP_method"],test_case)
 
-            test_case = "".join(
-                parts[j] + (mark if j == currnet_injec_index else "")
-                for j in range(len(parts))
-            )
             print(MsgEvent(target.DebugLevel(),'PAYLOAD',test_case),end='')
-            
-            if MainExploitTechnique["HTTP_method"]=='POST':
-                tmp_target.body.body=test_case
-            if MainExploitTechnique["HTTP_method"]=='GET':
-                tmp_target.url.url=test_case
-                tmp_target.url.RenewURL()
-
 
             res_content=test_connectivity(tmp_target)
             if res_content=='':
