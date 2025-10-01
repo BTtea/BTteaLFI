@@ -1,3 +1,8 @@
+# BTteaLFI
+# Copyright (C) 2024-2025 BTtea
+#
+# This file is licensed under GPLv2. See LICENSE.txt for details.
+
 import re
 
 def CheckBackendApp(target,head:str):

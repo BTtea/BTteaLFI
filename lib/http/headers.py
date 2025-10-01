@@ -1,9 +1,8 @@
-# -u
-# --data
-# --method
-# --cookie
-# -H / --header
-# --random-agent
+# BTteaLFI
+# Copyright (C) 2024-2025 BTtea
+#
+# This file is licensed under GPLv2. See LICENSE.txt for details.
+
 from lib.utils.my_functions import MsgEvent
 class Headers:
     def __init__(self,args,content_type,debug_level):

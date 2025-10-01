@@ -3,7 +3,6 @@
 #
 # This file is licensed under GPLv2. See LICENSE.txt for details.
 
-
 def ProGramARGS(argv,bttealfi_version):
     from argparse import ArgumentParser,SUPPRESS
     parser = ArgumentParser(prog=argv[0],usage=SUPPRESS)

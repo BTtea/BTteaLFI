@@ -1,3 +1,8 @@
+# BTteaLFI
+# Copyright (C) 2024-2025 BTtea
+#
+# This file is licensed under GPLv2. See LICENSE.txt for details.
+
 class ANSIcolors():
     Time        = '\033[38;5;44m'
     TRAFFIC_OUT = '\033[38;2;136;23;152m'

@@ -10,3 +10,5 @@
 * Fixed issues with correctly specifying backend technology and backend OS.
 
 * Added test payloads: JSP → web.xml, ASPX → web.config.
+
+* Optimize parameter display
