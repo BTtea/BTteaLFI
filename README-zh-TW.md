@@ -1,13 +1,21 @@
 本專案採用 GNU 通用公共授權 v2.0 (GPLv2) 授權。
 詳情請參閱"LICENSE.txt"文件。
 
+當前版本為 `v2.0#beta.01`，有關更新日誌，請參閱 `ChangeLog.md`。
+
+<div align="center">
+
 # bttealfi
-![](lib/data/img/logo.png)
+![](data/img/logo.png)
+
+</div>
+
+
 
 bttealfi 是一款開源滲透測試工具，可自動偵測並利用LFI漏洞，有豐富的參數，他使用一些內文檢測技術來嘗試挖掘潛在弱點，並且使用了與sqlmap相似的參數，如果滲透測試人員非常了解LFI弱點，您可以利用CVE-2024-4577來列舉文件(如果因WAF導致無法RCE)，或者具有SQL注入到LFI的權限，此工具可節省部分時間在列舉或下載文件，使其進一步洩漏目標資訊與弱點。
 
 # 截圖
-![](lib/data/img/bttealfi_screenshot.png)
+![](data/img/bttealfi_screenshot.png)
 
 # 安裝
 
@@ -19,54 +27,64 @@ bttealfi 是一款開源滲透測試工具，可自動偵測並利用LFI漏洞�
 
 ```
 $ python bttealfi.py -h
-usage: bttealfi.py [-h] [--version] -u URL [--data DATA] [--method METHOD] [--cookie COOKIE] [-H HEADER]
-                   [--random-agent] [--tamper TAMPER] [-v DEBUG_LEVEL] [--os OS type] [--prefix PREFIX]
-                   [--suffix SUFFIX] [--technique TECHNIQUE] [--php-wrapper PHP_WRAPPER] [--level {1,2,3}]
-                   [--backend-app {all,php,aspx,jsp}] [--batch] [--answer ANSWER] [--move Number]
-                   [--retries Number] [--path-depth Number] [--skip-xss] [--test-skip Prompt] [--flush-session]
-                   [--lfi-shell] [--detect-prefix DETECT_PREFIX] [--detect-suffix DETECT_SUFFIX] [--dump]
-                   [--timeout Number] [-p PARAM | --skip PARAM]
 
-options:
+     / ┳┓┏┳┓     ┓ ┏┓┳  v2.0#beta.01
+    /  ┣┫ ┃ ╋┏┓┏┓┃ ┣ ┃
+ . /   ┻┛ ┻ ┗┗ ┗┻┗┛┻ ┻  https://github.com/BTtea/BTteaLFI
+
+optional arguments:
   -h, --help            show this help message and exit
-  --version             Show program's version number and exits
+  -p PARAM              Specify parameters
+  --skip PARAM          skip parameters
+
+Target:
   -u URL, --url URL     input URL
   --data DATA           POST data
+
+General:
+  --version             Show program's version number and exits
+  -v DEBUG_LEVEL        debug information
+
+Request:
   --method METHOD       Method
   --cookie COOKIE       cookie session
   -H HEADER, --header HEADER
                         headers
   --random-agent        Use randomly selected HTTP User-Agent header value
   --tamper TAMPER       tamper file
-  -v DEBUG_LEVEL        debug information
-  --os OS type          Specify the backend operating system
+  --timeout Number      Time to wait for the web page response, default is 5 seconds
+  --retries Number      Number of retries on connection failure, default is 3
+
+Testing:
   --prefix PREFIX       Specify prefix
   --suffix SUFFIX       Specify suffix
   --technique TECHNIQUE
                         Specify testing techniques, Support RP, AP, and PHP_F options.
   --php-wrapper PHP_WRAPPER
                         Default test keywords for 'php://filter'
-  --level {1,2,3}       File type detection level — the higher the level, the more file types can be detected.
-                        Default: 1
+  --level {1,2,3}       File type detection level, the higher the level, the more file types can be detected. Default: 1
   --backend-app {all,php,aspx,jsp}
                         Web backend technology (php, asp, jsp). Default: all.
-  --batch               Never ask for user input, use the default behavior
-  --answer ANSWER       Set predefined answers (e.g. "quit=N,follow=N")
+  --lfi-shell           Prompt for an interactive LFI shell
   --move Number         Number of path traversal levels, default is 5
-  --retries Number      Number of retries on connection failure, default is 3
   --path-depth Number   Traversal range for testing LFI path depth, default is 0
   --skip-xss            Skip XSS payload testing
   --test-skip Prompt    Skip payload tests for the specified prompt.
-  --flush-session       Flush session files for current target
-  --lfi-shell           Prompt for an interactive LFI shell
+
+Detection:
   --detect-prefix DETECT_PREFIX
                         Context prefix for LFI file output
   --detect-suffix DETECT_SUFFIX
                         Context suffix for LFI file output
   --dump                Convert text output into a download
-  --timeout Number      Time to wait for the web page response, default is 5 seconds
-  -p PARAM              Specify parameters
-  --skip PARAM          skip parameters
+
+Output / Session:
+  --batch               Never ask for user input, use the default behavior
+  --answer ANSWER       Set predefined answers (e.g. "quit=N,follow=N")
+  --flush-session       Flush session files for current target
+
+Miscellaneous:
+  --os OS type          Specify the backend operating system
 ```
 
 * 基本參數，注入點請用'*'標記
@@ -123,16 +141,16 @@ options:
 
 # 一些演示截圖
 #### 使用除錯參數
-![](lib/data/img/debug.png)
+![](data/img/debug.png)
 
 #### 自定義前後綴
-![](lib/data/img/prefix_suffix.png)
+![](data/img/prefix_suffix.png)
 
 #### 使用`--lfi-shell`參數來快速遍歷檔案內容
-![](lib/data/img/lfi_shell.png)
+![](data/img/lfi_shell.png)
 
 #### 使用`--detect-prefix`來定義前綴用以限制捕捉的內容，並使用`--dump`來將取得的內容儲存在本地(不顯示)，並且使用`--answer`來定義有出現提問時來指定所選的回應
-![](lib/data/img/lfi_shell_detect_prefix_dump_answer.png)
+![](data/img/lfi_shell_detect_prefix_dump_answer.png)
 
 
 # 心得筆記

@@ -123,6 +123,17 @@
             "data": [
                 {
                     "level":1,
+                    "path": "WEB-INF/web.xml",
+                    "content": "<welcome-file-list>",
+                    "message": "absolute path access to the JSP file 'WEB-INF/web.xml'",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                },
+                {
+                    "level":1,
                     "path": "web.xml",
                     "content": "<welcome-file-list>",
                     "message": "absolute path access to the JSP file 'web.xml'",
@@ -302,6 +313,17 @@
         },
         "jsp": {
             "data": [
+                {
+                    "level":1,
+                    "path": "WEB-INF/web.xml",
+                    "content": "<welcome-file-list>",
+                    "message": "relative path access to the ASPX file 'WEB-INF/web.xml'",
+                    "error":[],
+                    "argv":{
+                        "GET" :"",
+                        "POST":""
+                    }
+                },
                 {
                     "level":1,
                     "path": "web.xml",

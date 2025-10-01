@@ -1,15 +1,21 @@
 This project is licensed under the GNU General Public License v2.0 (GPLv2).
 See the 'LICENSE.txt' file for details.
 
+Current version: `v2.0#beta.01`, For the changelog, please see `ChangeLog.md`.
+
+<div align="center">
+
 # bttealfi
-![](lib/data/img/logo.png)
+![](data/img/logo.png)
+
+</div>
 
 bttealfi is an open-source penetration testing tool that can automatically detect and exploit LFI vulnerabilities. It offers a wide range of parameters and uses content-based detection techniques to try to uncover potential weaknesses.
 
 If a penetration tester is highly familiar with LFI vulnerabilities, they can leverage CVE-2024-4577 to enumerate files (in cases where RCE is blocked by a WAF), or if they have SQL injection-to-LFI access, this tool can save time on enumerating or downloading files, thereby further exposing target information and weaknesses.
 
 # Screenshots
-![](lib/data/img/bttealfi_screenshot.png)
+![](data/img/bttealfi_screenshot.png)
 
 # Installation
 
@@ -21,54 +27,64 @@ Only supports Python 3.x versions
 
 ```
 $ python bttealfi.py -h
-usage: bttealfi.py [-h] [--version] -u URL [--data DATA] [--method METHOD] [--cookie COOKIE] [-H HEADER]
-                   [--random-agent] [--tamper TAMPER] [-v DEBUG_LEVEL] [--os OS type] [--prefix PREFIX]
-                   [--suffix SUFFIX] [--technique TECHNIQUE] [--php-wrapper PHP_WRAPPER] [--level {1,2,3}]
-                   [--backend-app {all,php,aspx,jsp}] [--batch] [--answer ANSWER] [--move Number]
-                   [--retries Number] [--path-depth Number] [--skip-xss] [--test-skip Prompt] [--flush-session]
-                   [--lfi-shell] [--detect-prefix DETECT_PREFIX] [--detect-suffix DETECT_SUFFIX] [--dump]
-                   [--timeout Number] [-p PARAM | --skip PARAM]
 
-options:
+     / ┳┓┏┳┓     ┓ ┏┓┳  v2.0#beta.01
+    /  ┣┫ ┃ ╋┏┓┏┓┃ ┣ ┃
+ . /   ┻┛ ┻ ┗┗ ┗┻┗┛┻ ┻  https://github.com/BTtea/BTteaLFI
+
+optional arguments:
   -h, --help            show this help message and exit
-  --version             Show program's version number and exits
+  -p PARAM              Specify parameters
+  --skip PARAM          skip parameters
+
+Target:
   -u URL, --url URL     input URL
   --data DATA           POST data
+
+General:
+  --version             Show program's version number and exits
+  -v DEBUG_LEVEL        debug information
+
+Request:
   --method METHOD       Method
   --cookie COOKIE       cookie session
   -H HEADER, --header HEADER
                         headers
   --random-agent        Use randomly selected HTTP User-Agent header value
   --tamper TAMPER       tamper file
-  -v DEBUG_LEVEL        debug information
-  --os OS type          Specify the backend operating system
+  --timeout Number      Time to wait for the web page response, default is 5 seconds
+  --retries Number      Number of retries on connection failure, default is 3
+
+Testing:
   --prefix PREFIX       Specify prefix
   --suffix SUFFIX       Specify suffix
   --technique TECHNIQUE
                         Specify testing techniques, Support RP, AP, and PHP_F options.
   --php-wrapper PHP_WRAPPER
                         Default test keywords for 'php://filter'
-  --level {1,2,3}       File type detection level — the higher the level, the more file types can be detected.
-                        Default: 1
+  --level {1,2,3}       File type detection level, the higher the level, the more file types can be detected. Default: 1
   --backend-app {all,php,aspx,jsp}
                         Web backend technology (php, asp, jsp). Default: all.
-  --batch               Never ask for user input, use the default behavior
-  --answer ANSWER       Set predefined answers (e.g. "quit=N,follow=N")
+  --lfi-shell           Prompt for an interactive LFI shell
   --move Number         Number of path traversal levels, default is 5
-  --retries Number      Number of retries on connection failure, default is 3
   --path-depth Number   Traversal range for testing LFI path depth, default is 0
   --skip-xss            Skip XSS payload testing
   --test-skip Prompt    Skip payload tests for the specified prompt.
-  --flush-session       Flush session files for current target
-  --lfi-shell           Prompt for an interactive LFI shell
+
+Detection:
   --detect-prefix DETECT_PREFIX
                         Context prefix for LFI file output
   --detect-suffix DETECT_SUFFIX
                         Context suffix for LFI file output
   --dump                Convert text output into a download
-  --timeout Number      Time to wait for the web page response, default is 5 seconds
-  -p PARAM              Specify parameters
-  --skip PARAM          skip parameters
+
+Output / Session:
+  --batch               Never ask for user input, use the default behavior
+  --answer ANSWER       Set predefined answers (e.g. "quit=N,follow=N")
+  --flush-session       Flush session files for current target
+
+Miscellaneous:
+  --os OS type          Specify the backend operating system
 ```
 
 * Basic parameters: mark the injection point with '*'
@@ -125,16 +141,16 @@ options:
 
 # Some demo screenshots
 #### Using debug parameters
-![](lib/data/img/debug.png)
+![](data/img/debug.png)
 
 #### Custom prefixes and suffixes
-![](lib/data/img/prefix_suffix.png)
+![](data/img/prefix_suffix.png)
 
 #### Use the `--lfi-shell` parameter to quickly traverse file contents
-![](lib/data/img/lfi_shell.png)
+![](data/img/lfi_shell.png)
 
 #### Use `--detect-prefix` to define a prefix to limit captured content, and use `--dump` to save the retrieved content locally (without displaying it). Additionally, use `--answer` to specify the chosen response when a prompt appears.
-![](lib/data/img/lfi_shell_detect_prefix_dump_answer.png)
+![](data/img/lfi_shell_detect_prefix_dump_answer.png)
 
 # Notes
 Sqlmap is truly a perfect and outstanding tool, making my penetration testing work convenient and fast. However, there isn’t a fully automated tool for LFI that I find really practical. I also grew tired of having to redesign exploitation scripts every time I discovered an LFI vulnerability. Therefore, I started this project based on my own experience and by referencing some operational behaviors of sqlmap, attempting to weaponize LFI exploitation. I intentionally chose not to directly reference sqlmap’s code as a personal challenge. Every time I complete a feature, I increasingly appreciate how truly powerful and elegant sqlmap is.
