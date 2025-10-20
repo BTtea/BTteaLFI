@@ -163,6 +163,7 @@ That said, this project has not fully met my expectations. There are many featur
 * Introduce 4096 (Linux) and 256 (Windows) suffix truncation testing techniques
 * Added RFI and SSRF testing techniques
 * Added detection techniques for various wrappers
+* Add a new parameter `-r`
 * Add a new parameter `--phpinfo`
 * Add a key parameter `--os-shell`
 * Extensions of the `--os-shell` feature:
@@ -173,3 +174,9 @@ That said, this project has not fully met my expectations. There are many featur
   * Detect and exploit CVE-2024-2961
   * Exploit phpinfo.php through race conditions
   * Exploit Session Upload Progress via race conditions
+
+
+# Acknowledgements
+* Thanks to `onefiresticks` for guidance on code architecture design.
+* Thanks to `fzwww` for helping optimize parts of the source code.
+* Thanks to `r888800009` for guidance and suggestions on modularization during the fourth refactor.

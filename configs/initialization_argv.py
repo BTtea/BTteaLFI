@@ -159,7 +159,7 @@ def ParamDebug(target):
         print(MsgEvent(target.debug_level(),'ERROR',f"'--move' and '--path-depth' cannot be used at the same time."),end='')
         exit(0)
     
-    if target.args.php_wrapper == '/etc/passwd':
+    if target.args.backend_app in ['php','all']  and target.args.php_wrapper == '/etc/passwd':
         print(MsgEvent(target.debug_level(),'WARNING',f"Recommend using --php-wrapper to specify the original value (e.g., if vuln.php?action=home, then use '--php-wrapper home') to improve detection of php://filter-based LFI."),end='')
 
     return

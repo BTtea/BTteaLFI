@@ -42,6 +42,22 @@ def update_request_payload(target,HTTP_method,payload):
     return target
 
 
+def test_payload(payload,target,currnet_injec_index,parts,HTTP_method):
+
+    payload=target.args.prefix + payload + target.args.suffix
+    payload=tamper_pipe_line(target.tampers(),payload)
+    test_case=combine_current_injection(payload,currnet_injec_index,parts)
+    target=update_request_payload(target,HTTP_method,test_case)
+    print(MsgEvent(target.debug_level(),'PAYLOAD',test_case),end='')
+    res_content=test_connectivity(target)
+    return res_content
+
+
+def xss_test():
+    pass
+
+
+
 def find_injection_points(target,HTTP_method):
     from os import listdir
     from json import load
@@ -52,7 +68,6 @@ def find_injection_points(target,HTTP_method):
     if HTTP_method=='GET':
         parts = target.parameters.url.url.split("*")
 
-
     find_payloads={
         "app_type"   : "",
         "os_version" : "",
@@ -61,6 +76,7 @@ def find_injection_points(target,HTTP_method):
         "app_banner" : "",
         "technique"  : []
     }
+
     for currnet_injec_index in range(len(parts)-1):
         run_only_once=True
         for current_file in listdir('./data/payloads/'):
@@ -79,15 +95,8 @@ def find_injection_points(target,HTTP_method):
             # testing XSS
             if not bool(target.args.skip_xss) and run_only_once:
                 run_only_once=False
-                xss_test=f"'{RandomString()}<'\">{RandomString()}"
-
-                xss_test=tamper_pipe_line(tmp_target.tampers(),xss_test)
-                test_case=combine_current_injection(xss_test,currnet_injec_index,parts)
-                tmp_target=update_request_payload(tmp_target,HTTP_method,test_case)
-
-                print(MsgEvent(target.debug_level(),'PAYLOAD',test_case),end='')
-
-                res_content=test_connectivity(tmp_target)
+                xss_test_payload=f"'{RandomString()}<'\">{RandomString()}"
+                res_content=test_payload(xss_test_payload,tmp_target,currnet_injec_index,parts,HTTP_method)
                 
                 if res_content=='Q' or res_content=='':
                     return
@@ -96,7 +105,7 @@ def find_injection_points(target,HTTP_method):
                     if res_content.status_code!=200:
                         print(MsgEvent(target.debug_level(),'DEBUG',f'got the http code : {HTTP_code_status(res_content.status_code)}'),end='')
 
-                    if xss_test in res_content.body:
+                    if xss_test_payload in res_content.body:
                         print(MsgEvent(target.debug_level(),'INFO',f"heuristic (XSS) test shows that {HTTP_method} parameter '#{currnet_injec_index+1}*' might be vulnerable to cross-site scripting (XSS) attacks",BoldFlag=True),end='')
 
                     _errmsg=CatchErrorMessage(res_content.body)
@@ -125,7 +134,7 @@ def find_injection_points(target,HTTP_method):
                     break
 
             # testing php://filter
-            if 'PHP_F' in target.technique:
+            if target.args.backend_app=='php' or 'PHP_F' in target.technique:
                 if target.args.os == 'windows' and target.args.php_wrapper == '/etc/passwd':
                     tmp_target.args.php_wrapper='C:/windows/win.ini'
                 elif target.args.os == 'all':
@@ -142,19 +151,12 @@ def find_injection_points(target,HTTP_method):
                     php_filter_test=iconv_lfi(iconv_lfi_string)+tmp_target.args.php_wrapper
                     if 'php-cgi/php-cgi.exe?%AD' in target.parameters.url.url:
                         php_filter_test=f"%22{php_filter_test}%22"
-                    php_filter_test=tmp_target.args.prefix + php_filter_test + tmp_target.args.suffix
 
-                    php_filter_test=tamper_pipe_line(tmp_target.tampers(),php_filter_test)
-                    test_case=combine_current_injection(php_filter_test,currnet_injec_index,parts)
-                    tmp_target=update_request_payload(tmp_target,HTTP_method,test_case)
-
-                    print(MsgEvent(target.debug_level(),'PAYLOAD',test_case),end='')
-
-                    res_content=test_connectivity(tmp_target)
+                    res_content=test_payload(php_filter_test,tmp_target,currnet_injec_index,parts,HTTP_method)
                 
                     if res_content=='Q' or res_content=='':
                         return
-                    
+
 
                     if res_content.status_code!=200:
                         print(MsgEvent(target.debug_level(),'DEBUG',f'got the http code : {HTTP_code_status(res_content.status_code)}'),end='')

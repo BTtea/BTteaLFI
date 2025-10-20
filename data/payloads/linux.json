@@ -317,7 +317,7 @@
                     "level":1,
                     "path": "WEB-INF/web.xml",
                     "content": "<welcome-file-list>",
-                    "message": "relative path access to the ASPX file 'WEB-INF/web.xml'",
+                    "message": "relative path access to the JSP file 'WEB-INF/web.xml'",
                     "error":[],
                     "argv":{
                         "GET" :"",
@@ -328,7 +328,7 @@
                     "level":1,
                     "path": "web.xml",
                     "content": "<welcome-file-list>",
-                    "message": "relative path access to the ASPX file 'web.xml'",
+                    "message": "relative path access to the JSP file 'web.xml'",
                     "error":[],
                     "argv":{
                         "GET" :"",

@@ -39,13 +39,18 @@ class ExploitDataSetting:
         return self.args.p.split(',') if self.args.p else []
 
     def check_technique(self,technique):
+        tech=['AP','RP']
         if technique==[]:
-            return ['AP','RP','PHP_F']
-        technique=technique.split(',')
-        for i in technique:
-            if i not in ['AP','RP','PHP_F']:
-                print(MsgEvent(self.debug_level(),'ERROR','Invalid technique specified; only AP and RP are supported.'),end='')
-                exit(0)
+            if self.args.backend_app=='php' or self.args.backend_app=='all':
+                tech.append('PHP_F')
+            return tech
+        else:
+            technique=technique.split(',')
+            # debug not exist technique
+            for i in technique:
+                if i not in ['AP','RP','PHP_F']:
+                    print(MsgEvent(self.debug_level(),'ERROR','Invalid technique specified; only AP and RP are supported.'),end='')
+                    exit(0)
         return technique
 
     def debug_level(self):
@@ -57,7 +62,7 @@ class ExploitDataSetting:
             tamper_files = [f.name for f in Path("./tamper").iterdir() if f.is_file() and f.suffix == ".py"]
             for scan in self.args.tamper.split(','):
                 if f'{scan}.py' not in tamper_files:
-                    print(MsgEvent(self.DebugLevel(),'CRITICAL',f"tamper script '{scan}' does not exist"),end='')
+                    print(MsgEvent(self.debug_level(),'CRITICAL',f"tamper script '{scan}' does not exist"),end='')
                     exit(0)
 
         return self.args.tamper.split(',') if self.args.tamper else []
