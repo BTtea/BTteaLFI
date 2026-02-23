@@ -27,7 +27,7 @@ def logo(version,url):
 
 
 def main(argv):
-    bttealfi_version='2.0#beta.01'
+    bttealfi_version='2.0#beta.02'
     github_url='https://github.com/BTtea/BTteaLFI'
     # 接收命令參數
 
