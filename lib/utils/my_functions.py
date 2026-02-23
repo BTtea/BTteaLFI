@@ -68,11 +68,11 @@ def AskQuestion(question:str,_choices,default:str,_target):
                         if current_ans.split('=')[0] in question:
                             choice=current_ans.split('=')[1].upper()
                     except:
-                        print('\n'+MsgEvent(_target.DebugLevel(),'ERROR',f"Incorrect usage of the '--answer' option. Refer to the correct format (e.g. \"quit=N,follow=N\")"),end='')
+                        print('\n'+MsgEvent(_target.debug_level(),'ERROR',f"Incorrect usage of the '--answer' option. Refer to the correct format (e.g. \"quit=N,follow=N\")"),end='')
                         exit(0)
                     
                     if current_ans.split('=')[0] in question and choice not in _choices:
-                        print('\n'+MsgEvent(_target.DebugLevel(),'ERROR',f"Incorrect usage of the '--answer' option. Refer to the correct format (e.g. \"quit=N,follow=N\")"),end='')
+                        print('\n'+MsgEvent(_target.debug_level(),'ERROR',f"Incorrect usage of the '--answer' option. Refer to the correct format (e.g. \"quit=N,follow=N\")"),end='')
                         exit(0)
 
                     if choice!='':

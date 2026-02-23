@@ -47,9 +47,9 @@ def test_connectivity(target,argv={"POST":"","GET":""}):
     from lib.utils.my_functions import MsgEvent,AskQuestion
 
     tmp_target=deepcopy(target)
+
     tmp_target.parameters.url.get_query=tmp_target.parameters.url.get_query.replace('*','')
-    if tmp_target.parameters.post.post_query:
-        tmp_target.parameters.post.post_query=tmp_target.parameters.post.post_query.replace('*','')
+    tmp_target.parameters.post.post_query=tmp_target.parameters.post.post_query.replace('*','')
 
     req=build_headers(tmp_target,argv=argv)
     print(MsgEvent(tmp_target.debug_level(),'TRAFFIC OUT',f'HTTP request:\n{req}'),end='')
@@ -59,7 +59,6 @@ def test_connectivity(target,argv={"POST":"","GET":""}):
         try:
             res=SendRequest(tmp_target,req)
         except KeyboardInterrupt:
-                
             print(MsgEvent(target.debug_level(),'WARNING',f'user aborted during detection phase'),end='')
             question = f"how do you want to proceed? [(K)eep testing/(q)uit] "
             _choices = ['K','q']
@@ -70,15 +69,14 @@ def test_connectivity(target,argv={"POST":"","GET":""}):
                 retry-=1
                 continue
             return r
-
         except Exception as e:
-            print(MsgEvent(target.debug_level(),'CRITICAL',f'connection timed out to the target URL. sqlmap is going to retry the request(s)'),end='')
-            print(MsgEvent(target.debug_level(),'DEBUG',f'connection timed out to the target URL. sqlmap is going to retry the request'),end='')
+            print(MsgEvent(tmp_target.debug_level(),'CRITICAL',f'connection timed out to the target URL. sqlmap is going to retry the request(s)'),end='')
+            print(MsgEvent(tmp_target.debug_level(),'DEBUG',f'connection timed out to the target URL. sqlmap is going to retry the request'),end='')
         if res:
             break
         
     if res=='':
-        print(MsgEvent(target.debug_level(),'WARNING',f"if the problem persists please check that the provided target URL is reachable. In case that it is, you can try to rerun with switch '--random-agent' and/or '--tamper option (e.g. --tamper dotslashobfuscate)'",BoldFlag=True),end='')
+        print(MsgEvent(tmp_target.debug_level(),'WARNING',f"if the problem persists please check that the provided target URL is reachable. In case that it is, you can try to rerun with switch '--random-agent' and/or '--tamper option (e.g. --tamper dotslashobfuscate)'",BoldFlag=True),end='')
         return res
 
     res_content=ResponsePacket(res)
